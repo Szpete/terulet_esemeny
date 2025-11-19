@@ -4,13 +4,13 @@
  */
 const tableheadarray=[ //tableheadarray valtozo deklaralasa, array tipusu tomb
     {//elso objektum
-        region:'Terület', //objektum region tulajdonsaganak string erteket adunk
+        title:'Terület', //objektum region tulajdonsaganak string erteket adunk
     },
     {//masodik objektum
-        year:'Évszám', //objektum year tulajdonsaganak string erteket adunk
+        title:'Évszám', //objektum year tulajdonsaganak string erteket adunk
     },
     {//harmadik objektum
-        event:'Esemény', //objektum event tulajdonsaganak string erteket adunk
+        title:'Esemény', //objektum event tulajdonsaganak string erteket adunk
     }
 ]
 
@@ -41,6 +41,9 @@ const tablebodyarray=[ //tablebodyarray valtozo deklaralasa, array tipusu tomb
     }
 ]
 
+
+
+
 /**
  * @type {HTMLTableElement} tablazat valtozo amiben a tablazat elem van
  */
@@ -53,133 +56,57 @@ document.body.appendChild(table) //hozzaadom a tablazatot a body-hoz
 const thead=document.createElement("thead") //letrehozok egy thead elemet
 table.appendChild(thead) //hozzaadom a thead elemet a tablazathoz
 
-/**
- * @type {HTMLTableCellElement} firstth valtozo amiben a th elso elem van
- */
-const firstth=document.createElement("th") //letrehozok egy th elemet
-firstth.innerText=tableheadarray[0].region //beallitom a th elso elem szoveget a megfelelo valtozora a tableheaderray tombbol
-thead.appendChild(firstth) //hozzaadom a th elso elemet a thead-hoz
+for(let i = 0; i< tableheadarray.length; i++){ //for ciklus amely annyiszor fut le mint ammenyi obkjektum van a tableheadarrayben
+    
+    /**
+    * @type {HTMLTableCellElement} letrehozom a thelement valtozot
+    */
+    const thelement=document.createElement("th") //letrehozok egy th elemet
+    thelement.innerText=tableheadarray[i].title //beallitom a th szoveget a megfelelo stringre  a tableheaderray tombbol az i indexu objektum title alapjan
+    thead.appendChild(thelement) //hozzaadom a th-t a thead-hez
+}
 
 /**
- * @type {HTMLTableCellElement} secondth valtozo amiben a th masodik elem van
+ * @type {HTMLTableSectionElement} tbody valtozo amiben a tbody elem van
  */
-const secondth=document.createElement("th") //letrehozok egy th elemet
-secondth.innerText=tableheadarray[1].year //beallitom a th masodik elem szoveget a megfelelo valtozora a tableheaderray tombbol
-thead.appendChild(secondth) //hozzaadom a th masodik elemet a thead-hoz
+const tbody=document.createElement("tbody") //letrehozok egy tbody elemet
+table.appendChild(tbody) //hozzaadom a tbody elemet a tablazathoz
 
-/**
- * @type {HTMLTableCellElement} thirdth valtozo amiben a th harmadik elem van
- */
-const thirdth=document.createElement("th") //letrehozok egy th elemet
-thirdth.innerText=tableheadarray[2].event //beallitom a th harmadik elem szoveget a megfelelo valtozora a tableheaderray tombbol
-thead.appendChild(thirdth) //hozzaadom a th harmadik elemet a thead-hoz
 
-/**
- * @type {HTMLTableRowElement} firsttr valtozo amiben a tr elso sor van
- */
-const firsttr=document.createElement("tr") //letrehozok egy tr elemet
-table.appendChild(firsttr) //hozzaadom a tr elemet a tablazathoz
+for(let i = 0; i<tablebodyarray.length; i++){ //for ciklus amely annyiszor fut le mint ammenyi obkjektum van a tablebodyarrayben
 
-/**
- * @type {HTMLTableCellElement} firsttd valtozo amiben a tr elso soranak elso eleme van
- */
-const firsttd=document.createElement("td") //letrehozok egy td elemet
-firsttd.innerText=tablebodyarray[0].region //beallitom a tr elso soranak elso elem szoveget a megfelelo valtozora
-firsttr.appendChild(firsttd) //hozzaadom a tr elso soranak elso elemét a tr-hez
+    /**
+     * @type {HTMLTableRowElement} letrehozok egy tablerow-t
+    */
+    const tablerow=document.createElement("tr") //letrehozok egy tr elemet
+    tbody.appendChild(tablerow) //hozzaadom a tr elemet a tablazathoz
 
-/**
- * @type {HTMLTableCellElement} secondtd valtozo amiben a tr elso soranak masodik eleme van
- */
-const secondtd=document.createElement("td") //letrehozok egy td elemet
-secondtd.innerText=tablebodyarray[0].year //beallitom a tr elso soranak masodik elem szoveget a megfelelo valtozora
-firsttr.appendChild(secondtd) //hozzaadom a tr elso soranak masodik elemét a tr-hez
+    /**
+    * @type {HTMLTableCellElement}  valtozo amiben egy td elem van
+    */
+    const firsttd=document.createElement("td") //letrehozok egy td elemet
+    firsttd.innerText=tablebodyarray[i].region //beallitom a td szoveget a megfelelo stringre  a tablebodyerray tombbol az i indexu objektum title alapjan
+    tablerow.appendChild(firsttd) //hozzaadom az elso td-t az trhez
+    
+    /**
+    * @type {HTMLTableCellElement} valtozo amiben egy td elem van
+    */
+    const secondtd=document.createElement("td") //letrehozok egy td elemet
+    secondtd.innerText=tablebodyarray[i].year //beallitom a td szoveget a megfelelo stringre  a tablebodyerray tombbol az i indexu objektum title alapjan
+    tablerow.appendChild(secondtd) //hozzaadom az elso td-t az trhez
 
-/**
- * @type {HTMLTableCellElement} thirdtd valtozo amiben a tr elso soranak harmadik eleme van
- */
-const thirdtd=document.createElement("td") //letrehozok egy td elemet
-thirdtd.innerText=tablebodyarray[0].event //beallitom a tr elso soranak harmadik elem szoveget a megfelelo valtozora
-firsttr.appendChild(thirdtd) //hozzaadom a tr elso soranak harmadik elemét a tr-hez
+    /**
+    * @type {HTMLTableCellElement}  valtozo amiben egy td elem van
+    */
+    const thirdtd=document.createElement("td") //letrehozok egy td elemet
+    thirdtd.innerText=tablebodyarray[i].event //beallitom a td szoveget a megfelelo stringre  a tablebodyerray tombbol az i indexu objektum title alapjan
+    tablerow.appendChild(thirdtd) //hozzaadom az elso td-t az trhez
+}
 
-/**
- * @type {HTMLTableRowElement} secondtr valtozo amiben a tr masodik sor van
- */
-const secondtr=document.createElement("tr") //letrehozok egy tr elemet
-table.appendChild(secondtr) //hozzaadom a tr elemet a tablazathoz
 
-/**
- * @type {HTMLTableCellElement} secondtrfirsttd valtozo amiben a tr masodik soranak elso eleme van
- */
-const secondtrfirsttd=document.createElement("td") //letrehozok egy td elemet
-secondtrfirsttd.innerText=tablebodyarray[1].region //beallitom a tr masodik soranak elso elem szoveget a megfelelo valtozora
-secondtr.appendChild(secondtrfirsttd) //hozzaadom a tr masodik soranak elso elemét a tr-hez
 
-/**
- * @type {HTMLTableCellElement} secondtrsecondtd valtozo amiben a tr masodik soranak masodik eleme van
- */
-const secondtrsecondtd=document.createElement("td") //letrehozok egy td elemet
-secondtrsecondtd.innerText=tablebodyarray[1].year //beallitom a tr masodik soranak masodik elem szoveget a megfelelo valtozora
-secondtr.appendChild(secondtrsecondtd) //hozzaadom a tr masodik soranak masodik elemét a tr-hez
 
-/**
- * @type {HTMLTableCellElement} secondtrthirdtd valtozo amiben a tr masodik soranak harmadik eleme van
- */
-const secondtrthirdtd=document.createElement("td") //letrehozok egy td elemet
-secondtrthirdtd.innerText=tablebodyarray[1].event //beallitom a tr masodik soranak harmadik elem szoveget a megfelelo valtozora
-secondtr.appendChild(secondtrthirdtd) //hozzaadom a tr masodik soranak harmadik elemét a tr-hez
 
-/**
- * @type {HTMLTableCellElement} secondtrfourthtd valtozo amiben a tr masodik soranak negyedik eleme van
- */
-const secondtrfourthtd=document.createElement("td") //letrehozok egy td elemet
-secondtrfourthtd.innerText=tablebodyarray[1].secondyear //beallitom a tr masodik soranak negyedik elem szoveget a megfelelo valtozora
-secondtr.appendChild(secondtrfourthtd) //hozzaadom a tr masodik soranak negyedik elemét a tr-hez
 
-/**
- * @type {HTMLTableCellElement} secondtrfifthtd valtozo amiben a tr masodik soranak otodik eleme van
- */
-const secondtrfifthtd=document.createElement("td") //letrehozok egy td elemet
-secondtrfifthtd.innerText=tablebodyarray[1].secondevent //beallitom a tr masodik soranak otodik elem szoveget a megfelelo valtozora
-secondtr.appendChild(secondtrfifthtd) //hozzaadom a tr masodik soranak otodik elemét a tr-hez
 
-/**
- * @type {HTMLTableRowElement} thirdtr valtozo amiben a tr harmadik sor van
- */
-const thirdtr=document.createElement("tr") //letrehozok egy tr elemet
-table.appendChild(thirdtr) //hozzaadom a tr elemet a tablazathoz
-
-/**
- * @type {HTMLTableCellElement} thirdtrfirsttd valtozo amiben a tr harmadik soranak elso eleme van
- */
-const thirdtrfirsttd=document.createElement("td") //letrehozok egy td elemet
-thirdtrfirsttd.innerText=tablebodyarray[2].region //beallitom a tr harmadik soranak elso elem szoveget a megfelelo valtozora
-thirdtr.appendChild(thirdtrfirsttd) //hozzaadom a tr harmadik soranak elso elemét a tr-hez
-
-/**
- * @type {HTMLTableCellElement} thirdtrsecondtd valtozo amiben a tr harmadik soranak masodik eleme van
- */
-const thirdtrsecondtd=document.createElement("td") //letrehozok egy td elemet
-thirdtrsecondtd.innerText=tablebodyarray[2].year //beallitom a tr harmadik soranak masodik elem szoveget a megfelelo valtozora
-thirdtr.appendChild(thirdtrsecondtd) //hozzaadom a tr harmadik soranak masodik elemét a tr-hez
-
-/**
- * @type {HTMLTableCellElement} thirdtrthirdtd valtozo amiben a tr harmadik soranak harmadik eleme van
- */
-const thirdtrthirdtd=document.createElement("td") //letrehozok egy td elemet
-thirdtrthirdtd.innerText=tablebodyarray[2].event //beallitom a tr harmadik soranak harmadik elem szoveget a megfelelo valtozora
-thirdtr.appendChild(thirdtrthirdtd) //hozzaadom a tr harmadik soranak harmadik elemét a tr-hez
-
-/**
- * @type {HTMLTableCellElement} thirdtrfourthtd valtozo amiben a tr harmadik soranak negyedik eleme van
- */
-const thirdtrfourthtd=document.createElement("td") //letrehozok egy td elemet
-thirdtrfourthtd.innerText=tablebodyarray[2].secondyear //beallitom a tr harmadik soranak negyedik elem szoveget a megfelelo valtozora
-thirdtr.appendChild(thirdtrfourthtd) //hozzaadom a tr harmadik soranak negyedik elemét a tr-hez
-
-/**
- * @type {HTMLTableCellElement} thirdtrfifthtd valtozo amiben a tr harmadik soranak otodik eleme van
- */
-const thirdtrfifthtd=document.createElement("td") //letrehozok egy td elemet
-thirdtrfifthtd.innerText=tablebodyarray[2].secondevent //beallitom a tr harmadik soranak otodik elem szoveget a megfelelo valtozora
-thirdtr.appendChild(thirdtrfifthtd) //hozzaadom a tr harmadik soranak otodik elemét a tr-hez
 
