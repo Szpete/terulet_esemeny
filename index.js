@@ -1,25 +1,22 @@
 
-/**
- * @type {region:string} headerregion objektum string valtozo amiben a tablazat fejlecenek elso eleme van
- */
-const headerregion={ //headerformname valtozo letrehozasa
-    region:'Terület' //regionnek string eteket adunk
-}
 
 
 /**
- * @type {year:string} headeryear objektum string valtozo amiben a tablazat fejlecenek masodik eleme van
+ *  @type {{region:string, year:string, event:string}[]} tableheadarray tomb amely objektumokat tartalmaz a tablazat fejlecehez
  */
-const headeryear={ //headerformname valtozo letrehozasa
-    year:'Évszám' //yearnek string eteket adunk
-}
+const tableheadarray=[ //tableheadarray valtozo deklaralasa, array tipusu tomb
+    {//elso objektum
+        region:'Terület', //objektum region tulajdonsaganak string erteket adunk
+    },
+    {//masodik objektum
+        year:'Évszám', //objektum year tulajdonsaganak string erteket adunk
+    },
+    {//harmadik objektum
+        event:'Esemény', //objektum event tulajdonsaganak string erteket adunk
+    }
+]
 
-/**
- * @type {event:string} headerevent objektum string valtozo amiben a tablazat fejlecenek harmadik eleme van
- */
-const headerevent={ //headerformname valtozo letrehozasa
-    event:'Esemény' //eventnek string eteket adunk
-}
+
 
 /**
  * @type {region:string, year:string, event:string} firstrow objektum string valtozo amiben a tablazat elso soranak adatai vannak
@@ -76,21 +73,21 @@ table.appendChild(thead) //hozzaadom a thead elemet a tablazathoz
  * @type {HTMLTableCellElement} firstth valtozo amiben a th elso elem van
  */
 const firstth=document.createElement("th") //letrehozok egy th elemet
-firstth.textContent=headerregion.region //beallitom a th elso elem szoveget a megfelelo valtozora
+firstth.textContent=tableheadarray[0].region //beallitom a th elso elem szoveget a megfelelo valtozora a tableheaderray tombbol
 thead.appendChild(firstth) //hozzaadom a th elso elemet a thead-hoz
 
 /**
  * @type {HTMLTableCellElement} secondth valtozo amiben a th masodik elem van
  */
 const secondth=document.createElement("th") //letrehozok egy th elemet
-secondth.textContent=headeryear.year //beallitom a th masodik elem szoveget a megfelelo valtozora
+secondth.textContent=tableheadarray[1].year //beallitom a th masodik elem szoveget a megfelelo valtozora a tableheaderray tombbol
 thead.appendChild(secondth) //hozzaadom a th masodik elemet a thead-hoz
 
 /**
  * @type {HTMLTableCellElement} thirdth valtozo amiben a th harmadik elem van
  */
 const thirdth=document.createElement("th") //letrehozok egy th elemet
-thirdth.textContent=headerevent.event //beallitom a th harmadik elem szoveget a megfelelo valtozora
+thirdth.textContent=tableheadarray[2].event //beallitom a th harmadik elem szoveget a megfelelo valtozora a tableheaderray tombbol
 thead.appendChild(thirdth) //hozzaadom a th harmadik elemet a thead-hoz
 
 /**
