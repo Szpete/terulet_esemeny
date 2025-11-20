@@ -55,16 +55,13 @@ document.body.appendChild(table) //hozzaadom a tablazatot a body-hoz
 const thead=document.createElement("thead") //letrehozok egy thead elemet
 table.appendChild(thead) //hozzaadom a thead elemet a tablazathoz
 
-for(let i = 0; i< tableheadarray.length; i++){ //for ciklus amely annyiszor fut le mint ammenyi obkjektum van a tableheadarrayben
-    /**
-     * @type {HTMLTableCellElement} letrehozom a th-t
-    */
-    const firstth = document.createElement("th") //letrehozok egy th elemet
-    firstth.innerText=tableheadarray[i].title //megadom a th szoveget a tableheadarray tombbol
-    thead.appendChild(firstth) //hozzaadom a th elemet a tablazathoz
+CreateTHCellElement("th", tableheadarray[0].title, thead) //meghivom azt a fuggvenyt ami a th elemet hozza letre 
+CreateTHCellElement("th", tableheadarray[1].title, thead) //meghivom azt a fuggvenyt ami a th elemet hozza letre
 
-    
-}
+/**
+ * @type {HTMLTableCellElement} thirdth valtozo amiben egy fuggven eredmenye van eltarolva
+ */ 
+const thirdth=CreateTHCellElement("th", tableheadarray[0].title, thead) //meghivom azt a fuggvenyt ami a th elemet hozza letre, es eltarolom egy valtozoban 
 
 /**
  * @type {HTMLTableSectionElement} tbody valtozo amiben a tbody elem van
@@ -81,47 +78,61 @@ for(let i = 0; i<tablebodyarray.length; i++){ //for ciklus amely annyiszor fut l
     const tablerow=document.createElement("tr") //letrehozok egy tr elemet
     tbody.appendChild(tablerow) //hozzaadom a tr elemet a tablazathoz
 
-    /**
-     * @type {HTMLTableCellElement} letrehozom a td-t
-    */
-    const firsttd=document.createElement("td") //letrehozok egy td elemet
-    firsttd.innerText=tablebodyarray[i].szerzo //megadom a td szooveget a tombol
-    tablerow.appendChild(firsttd) //hozzaadom  a td elemet a tr-hez 
+    CreateCellElement("td", tablebodyarray[i].szerzo, tablerow) //meghivom a fuggvenyt a megfelelo parameterekkel 
+    CreateCellElement("td", tablebodyarray[i].remekmu, tablerow) //meghivom a fuggvenyt a megfelelo parameterekkel 
 
     /**
      * @type {HTMLTableCellElement} letrehozom a td-t
     */
-    const secondtd=document.createElement("td") //letrehozok egy td elemet
-    secondtd.innerText=tablebodyarray[i].remekmu //megadom a td szooveget a tombol
-    tablerow.appendChild(secondtd) //hozzaadom  a td elemet a tr-hez 
-
-    /**
-     * @type {HTMLTableCellElement} letrehozom a td-t
-    */
-    const thirdtd=document.createElement("td") //letrehozok egy td elemet
-    thirdtd.innerText=tablebodyarray[i].karakter //megadom a td szooveget a tombol
-    tablerow.appendChild(thirdtd) //hozzaadom  a td elemet a tr-hez 
+    const thirdtd = CreateCellElement("td", tablebodyarray[i].karakter, tablerow) //meghivom a fuggvenyt a megfelelo parameterekkel es eltarolom a thirdtd valtozoban
 
     
 
     if(tablebodyarray[i].secondkarakter != undefined){ // ha defined a secondkarakter akkor letrehoz meg egy td-t
 
-       /**
-        * @type {HTMLTableCellElement} letrehozom a td-t
-        */
-        const fourthtd=document.createElement("td") //letrehozok egy td elemet
-        fourthtd.innerText=tablebodyarray[i].secondkarakter //megadom a td szooveget a tombol
-        tablerow.appendChild(fourthtd) //hozzaadom  a td elemet a tr-hez 
+       
+        CreateCellElement("td", tablebodyarray[i].secondkarakter, tablerow) //meghivom a fuggvenyt a megfelelo parameterekkel 
     }
     else{ //ha undefined a secondkarakter akkor a 3dik td-re tesz egy colspant
         thirdtd.colSpan="2" //rateszi a tdre a colspant
-        
-        
+        thirdth.colSpan="2" //rateszi a th-ra a colSpant 
     }
-
-
-
 }
 
 
 
+/**
+ * 
+ * @param {string} celltype  //a fuggveny celltype parameterenek string erteket adunk
+ * @param {string} cellcontent //a fuggveny cellcontent parameterenek string erteket adunk
+ * @param {HTMLTableRowElement} cellrow //a cellrow valtozo amiben a tablerow van
+ * @returns {HTMLTableCellElement} 
+ */
+function CreateCellElement(celltype, cellcontent, cellrow){ //deklaralom a fuggvenyt amivel a td vagy th-kat letrehozom
+    /**
+    * @type {HTMLTableCellElement} cellelement valtozo amiben egy td vagy th elem van
+    */
+    const cellelement=document.createElement(celltype) //letrehozok egy tablazat elemet a celltype alapjan
+    cellelement.innerText=cellcontent //beallitom az erteket a cellcontent alapjan
+    cellrow.appendChild(cellelement) //hozzaadom a cellelementet a cellrowhoz
+    return cellelement //visszateritem a cellelmentet
+}
+
+
+
+/**
+ * 
+ * @param {string} celltype  //a fuggveny celltype parameterenek string erteket adunk
+ * @param {string} cellcontent //a fuggveny cellcontent parameterenek string erteket adunk
+ * @param {HTMLTableRowElement} celltype //a cellrow valtozo amiben a tablerow van
+ * @returns {HTMLTableCellElement} 
+ */
+function CreateTHCellElement(celltype, thcellcontent, celltype){ //deklaralom a fuggvenyt amivel a td vagy th-kat letrehozom
+    /**
+    * @type {HTMLTableCellElement} cellelement valtozo amiben egy td vagy th elem van
+    */
+    const cellelement=document.createElement(celltype) //letrehozok egy tablazat elemet a celltype alapjan
+    cellelement.innerText=thcellcontent //beallitom az erteket a cellcontent alapjan
+    celltype.appendChild(cellelement) //hozzaadom a cellelementet a cellrowhoz
+    return cellelement //visszateritem a cellelmentet
+}
