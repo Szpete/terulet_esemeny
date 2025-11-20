@@ -58,12 +58,7 @@ table.appendChild(thead) //hozzaadom a thead elemet a tablazathoz
 
 for(let i = 0; i< tableheadarray.length; i++){ //for ciklus amely annyiszor fut le mint ammenyi obkjektum van a tableheadarrayben
     
-    /**
-    * @type {HTMLTableCellElement} letrehozom a thelement valtozot
-    */
-    const thelement=document.createElement("th") //letrehozok egy th elemet
-    thelement.innerText=tableheadarray[i].title //beallitom a th szoveget a megfelelo stringre  a tableheaderray tombbol az i indexu objektum title alapjan
-    thead.appendChild(thelement) //hozzaadom a th-t a thead-hez
+    CreateCellElement("th", tableheadarray[i].title, thead) //meghivom a CreateCellElement fuggvenyem amivel a th-kat letrehozom, es megadom neki a megfelelo parametereket
 }
 
 /**
@@ -82,26 +77,14 @@ for(let i = 0; i<tablebodyarray.length; i++){ //for ciklus amely annyiszor fut l
     tbody.appendChild(tablerow) //hozzaadom a tr elemet a tablazathoz
 
     /**
-    * @type {HTMLTableCellElement}  valtozo amiben egy td elem van
+     * @type {HTMLTableCellElement} firsttd valtozo amiben az elso td elem van
     */
-    const firsttd=document.createElement("td") //letrehozok egy td elemet
-    firsttd.innerText=tablebodyarray[i].region //beallitom a td szoveget a megfelelo stringre  a tablebodyerray tombbol az i indexu objektum title alapjan
-    tablerow.appendChild(firsttd) //hozzaadom az elso td-t az trhez
+    const firsttd = CreateCellElement("td", tablebodyarray[i].region, tablerow) //meghivom a CreateCellElement fuggvenyem amivel a td-ket letrehozom, es megadom neki a megfelelo parametereket
     
-    /**
-    * @type {HTMLTableCellElement} valtozo amiben egy td elem van
-    */
-    const secondtd=document.createElement("td") //letrehozok egy td elemet
-    secondtd.innerText=tablebodyarray[i].year //beallitom a td szoveget a megfelelo stringre  a tablebodyerray tombbol az i indexu objektum title alapjan
-    tablerow.appendChild(secondtd) //hozzaadom az masdik td-t az trhez
+    CreateCellElement("td", tablebodyarray[i].year, tablerow) //meghivom a CreateCellElement fuggvenyem amivel a td-ket letrehozom, es megadom neki a megfelelo parametereketz trhez
 
-    /**
-    * @type {HTMLTableCellElement}  valtozo amiben egy td elem van
-    */
-    const thirdtd=document.createElement("td") //letrehozok egy td elemet
-    thirdtd.innerText=tablebodyarray[i].event //beallitom a td szoveget a megfelelo stringre  a tablebodyerray tombbol az i indexu objektum title alapjan
-    tablerow.appendChild(thirdtd) //hozzaadom az harmadik td-t az trhez
-
+    CreateCellElement("td", tablebodyarray[i].event, tablerow) //meghivom a CreateCellElement fuggvenyem amivel a td-ket letrehozom, es megadom neki a megfelelo parametereket
+    
     if(tablebodyarray[i].secondyear && tablebodyarray[i].secondevent){ //ha az i indexu objektumnak van secondyear es secondevent tulajdonsga akkor ...
 
         /**
@@ -110,37 +93,33 @@ for(let i = 0; i<tablebodyarray.length; i++){ //for ciklus amely annyiszor fut l
         const secondtablerow=document.createElement("tr") //letrehozok egy tr elemet
         tbody.appendChild(secondtablerow) //hozzaadom a tr elemet a tablazathoz
 
-        /**
-        * @type {HTMLTableCellElement} valtozo amiben egy td elem van
-        */
-        const fourthtd=document.createElement("td") //letrehozok egy td elemet
-        fourthtd.innerText=tablebodyarray[i].secondyear //beallitom a td szoveget a megfelelo stringre  a tablebodyerray tombbol az i indexu objektum title alapjan
-        secondtablerow.appendChild(fourthtd) //hozzaadom az elso td-t az trhez
+        CreateCellElement("td", tablebodyarray[i].secondyear, secondtablerow) //meghivom a CreateCellElement fuggvenyem amivel a td-ket letrehozom, es megadom neki a megfelelo parametereket
 
-        /**
-        * @type {HTMLTableCellElement}  valtozo amiben egy td elem van
-        */
-        const fifthtd=document.createElement("td") //letrehozok egy td elemet
-        fifthtd.innerText=tablebodyarray[i].secondevent //beallitom a td szoveget a megfelelo stringre  a tablebodyerray tombbol az i indexu objektum title alapjan
-        secondtablerow.appendChild(fifthtd) //hozzaadom az elso td-t az trhez
-
+        CreateCellElement("td", tablebodyarray[i].secondevent, secondtablerow) //meghivom a CreateCellElement fuggvenyem amivel a td-ket letrehozom, es megadom neki a megfelelo parametereket
+        
         firsttd.rowSpan=2 //beallitom az elso td rowSpan erteket 2-re
     }
-
-
-
-
-
-
-
-
-
-
 }
 
 
 
+/**
+ * 
+ * @param {string} celltype  //a fuggveny celltype parameterenek string erteket adunk
+ * @param {string} cellcontent //a fuggveny cellcontent parameterenek string erteket adunk
+ * @param {HTMLTableRowElement} cellrow //a cellrow valtozo amiben a tablerow van
+ * @returns {HTMLTableCellElement} 
+ */
+function CreateCellElement(celltype, cellcontent, cellrow){ //deklaralom a fuggvenyt amivel a td vagy th-kat letrehozom
 
+    /**
+    * @type {HTMLTableCellElement} cellelement valtozo amiben egy td vagy th elem van
+    */
+    const cellelement=document.createElement(celltype) //letrehozok egy tablazat elemet a celltype alapjan
+    cellelement.innerText=cellcontent //beallitom az erteket a cellcontent alapjan
+    cellrow.appendChild(cellelement) //hozzaadom a cellelementet a cellrowhoz
+    return cellelement //visszateritem a cellelmentet
+}
 
 
 
