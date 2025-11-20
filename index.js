@@ -11,8 +11,8 @@ const tableheadarray=[ //tableheadarray valtozo deklaralasa, array tipusu tomb
     },
     {//harmadik objektum
         title:'Szereplő', //objektum title tulajdonsaganak string erteket adunk
-    }
-    
+    },
+   
 ]
 
 /**
@@ -62,6 +62,8 @@ for(let i = 0; i< tableheadarray.length; i++){ //for ciklus amely annyiszor fut 
     const firstth = document.createElement("th") //letrehozok egy th elemet
     firstth.innerText=tableheadarray[i].title //megadom a th szoveget a tableheadarray tombbol
     thead.appendChild(firstth) //hozzaadom a th elemet a tablazathoz
+
+    
 }
 
 /**
@@ -100,19 +102,26 @@ for(let i = 0; i<tablebodyarray.length; i++){ //for ciklus amely annyiszor fut l
     thirdtd.innerText=tablebodyarray[i].karakter //megadom a td szooveget a tombol
     tablerow.appendChild(thirdtd) //hozzaadom  a td elemet a tr-hez 
 
-    /**
-     * @type {HTMLTableCellElement} letrehozom a td-t
-    */
-    const fourthtd=document.createElement("td") //letrehozok egy td elemet
-    fourthtd.innerText=tablebodyarray[i].secondkarakter //megadom a td szooveget a tombol
-    tablerow.appendChild(fourthtd) //hozzaadom  a td elemet a tr-hez 
-
     
+
+    if(tablebodyarray[i].secondkarakter != undefined){ // ha defined a secondkarakter akkor letrehoz meg egy td-t
+
+       /**
+        * @type {HTMLTableCellElement} letrehozom a td-t
+        */
+        const fourthtd=document.createElement("td") //letrehozok egy td elemet
+        fourthtd.innerText=tablebodyarray[i].secondkarakter //megadom a td szooveget a tombol
+        tablerow.appendChild(fourthtd) //hozzaadom  a td elemet a tr-hez 
+    }
+    else{ //ha undefined a secondkarakter akkor a 3dik td-re tesz egy colspant
+        thirdtd.colSpan="2" //rateszi a tdre a colspant
+        
+        
+    }
+
+
+
 }
-
-
-
-
 
 
 
