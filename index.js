@@ -1,43 +1,42 @@
 
 /**
- *  @type {{region:string, year:string, event:string}[]} tableheadarray tomb amely objektumokat tartalmaz a tablazat fejlecehez
+ *  @type {{title:string, title:string, title:string}[]} tableheadarray tomb amely objektumokat tartalmaz a tablazat fejlecehez
  */
 const tableheadarray=[ //tableheadarray valtozo deklaralasa, array tipusu tomb
     {//elso objektum
-        title:'Terület', //objektum region tulajdonsaganak string erteket adunk
+        title:'Szerző', //objektum title tulajdonsaganak string erteket adunk
     },
     {//masodik objektum
-        title:'Évszám', //objektum year tulajdonsaganak string erteket adunk
+        title:'Mű', //objektum title tulajdonsaganak string erteket adunk
     },
     {//harmadik objektum
-        title:'Esemény', //objektum event tulajdonsaganak string erteket adunk
+        title:'Szereplő', //objektum title tulajdonsaganak string erteket adunk
     }
+    
 ]
 
 /**
- * @type {{region:string, year:string, event:string, secondyear?:string, secondevent?:string}[]} tablebodyarray tomb amely objektumokat tartalmaz a tbody-hez
+ * @type {{szerzo:string, remekmu:string, karakter:string, secondkarakter:string}[]} tablebodyarray tomb amely objektumokat tartalmaz a tbody-hez
  */
 const tablebodyarray=[ //tablebodyarray valtozo deklaralasa, array tipusu tomb
     {//elso objektum
-        region:'Amerika', //objektum region tulajdonsaganak string erteket adunk
+        szerzo:'Katona József', //objektum szerzo tulajdonsaganak string erteket adunk
+        remekmu:'Bánk bán', //objektum remekmu tulajdonsaganak string erteket adunk
+        karakter:'Gertrudis királyné' //objektum karakter tulajdonsaganak string erteket adunk
 
-        year:'1860-1865', //objektum year tulajdonsaganak string erteket adunk
-
-        event:'polgárháború' //objektum event tulajdonsaganak string erteket adunk
     },
     {//masodik objektum
-        region:'Európa', //objektum region tulajdonsaganak string erteket adunk
-        year:'1914 június 28', //objektum year tulajdonsaganak string erteket adunk
-        event:'merénylet szarajevóban', //objektum event tulajdonsaganak string erteket adunk
-        secondyear:'1914 július 28', //objektum secondyear tulajdonsaganak string erteket adunk
-        secondevent:'A mohácsi csata' //objektum secondevent tulajdonsaganak string erteket adunk
+        szerzo:'Mikszáth Kálmán', //objektum szerzo tulajdonsaganak string erteket adunk
+        remekmu:'Beszterce ostroma', //objektum remekmu tulajdonsaganak string erteket adunk
+        karakter:"Pongrác István gróf", //objektum karakter tulajdonsaganak string erteket adunk
+        secondkarakter:'Estella', //objektum secondkarakter tulajdonsaganak string erteket adunk
+        
     },
     {//harmadik objektum
-        region:'Oroszország', //objektum region tulajdonsaganak string erteket adunk
-        year:'1917', //objektum year tulajdonsaganak string erteket adunk
-        event:'Oroszországi forradalom és bolsevik hatalomátvétel', //objektum event tulajdonsaganak string erteket adunk
-        secondyear:'1933', //objektum secondyear tulajdonsaganak string erteket adunk
-        secondevent:'Szovjetúnió megalakulása' //objektum secondevent tulajdonsaganak string erteket adunk
+        szerzo:'Arany János', //objektum szerzo tulajdonsaganak string erteket adunk
+        remekmu:'Toldi', //objektum remekmu tulajdonsaganak string erteket adunk
+        karakter:"Toldi Miklós" //objektum karakter tulajdonsaganak string erteket adunk
+       
     }
 ]
 
@@ -57,8 +56,12 @@ const thead=document.createElement("thead") //letrehozok egy thead elemet
 table.appendChild(thead) //hozzaadom a thead elemet a tablazathoz
 
 for(let i = 0; i< tableheadarray.length; i++){ //for ciklus amely annyiszor fut le mint ammenyi obkjektum van a tableheadarrayben
-    
-    CreateCellElement("th", tableheadarray[i].title, thead) //meghivom a CreateCellElement fuggvenyem amivel a th-kat letrehozom, es megadom neki a megfelelo parametereket
+    /**
+     * @type {HTMLTableCellElement} letrehozom a th-t
+    */
+    const firstth = document.createElement("th") //letrehozok egy th elemet
+    firstth.innerText=tableheadarray[i].title //megadom a th szoveget a tableheadarray tombbol
+    thead.appendChild(firstth) //hozzaadom a th elemet a tablazathoz
 }
 
 /**
@@ -77,49 +80,38 @@ for(let i = 0; i<tablebodyarray.length; i++){ //for ciklus amely annyiszor fut l
     tbody.appendChild(tablerow) //hozzaadom a tr elemet a tablazathoz
 
     /**
-     * @type {HTMLTableCellElement} firsttd valtozo amiben az elso td elem van
+     * @type {HTMLTableCellElement} letrehozom a td-t
     */
-    const firsttd = CreateCellElement("td", tablebodyarray[i].region, tablerow) //meghivom a CreateCellElement fuggvenyem amivel a td-ket letrehozom, es megadom neki a megfelelo parametereket
-    
-    CreateCellElement("td", tablebodyarray[i].year, tablerow) //meghivom a CreateCellElement fuggvenyem amivel a td-ket letrehozom, es megadom neki a megfelelo parametereketz trhez
-
-    CreateCellElement("td", tablebodyarray[i].event, tablerow) //meghivom a CreateCellElement fuggvenyem amivel a td-ket letrehozom, es megadom neki a megfelelo parametereket
-    
-    if(tablebodyarray[i].secondyear && tablebodyarray[i].secondevent){ //ha az i indexu objektumnak van secondyear es secondevent tulajdonsga akkor ...
-
-        /**
-         * @type {HTMLTableRowElement} letrehozok egy tablerow-t
-        */
-        const secondtablerow=document.createElement("tr") //letrehozok egy tr elemet
-        tbody.appendChild(secondtablerow) //hozzaadom a tr elemet a tablazathoz
-
-        CreateCellElement("td", tablebodyarray[i].secondyear, secondtablerow) //meghivom a CreateCellElement fuggvenyem amivel a td-ket letrehozom, es megadom neki a megfelelo parametereket
-
-        CreateCellElement("td", tablebodyarray[i].secondevent, secondtablerow) //meghivom a CreateCellElement fuggvenyem amivel a td-ket letrehozom, es megadom neki a megfelelo parametereket
-        
-        firsttd.rowSpan=2 //beallitom az elso td rowSpan erteket 2-re
-    }
-}
-
-
-
-/**
- * 
- * @param {string} celltype  //a fuggveny celltype parameterenek string erteket adunk
- * @param {string} cellcontent //a fuggveny cellcontent parameterenek string erteket adunk
- * @param {HTMLTableRowElement} cellrow //a cellrow valtozo amiben a tablerow van
- * @returns {HTMLTableCellElement} 
- */
-function CreateCellElement(celltype, cellcontent, cellrow){ //deklaralom a fuggvenyt amivel a td vagy th-kat letrehozom
+    const firsttd=document.createElement("td") //letrehozok egy td elemet
+    firsttd.innerText=tablebodyarray[i].szerzo //megadom a td szooveget a tombol
+    tablerow.appendChild(firsttd) //hozzaadom  a td elemet a tr-hez 
 
     /**
-    * @type {HTMLTableCellElement} cellelement valtozo amiben egy td vagy th elem van
+     * @type {HTMLTableCellElement} letrehozom a td-t
     */
-    const cellelement=document.createElement(celltype) //letrehozok egy tablazat elemet a celltype alapjan
-    cellelement.innerText=cellcontent //beallitom az erteket a cellcontent alapjan
-    cellrow.appendChild(cellelement) //hozzaadom a cellelementet a cellrowhoz
-    return cellelement //visszateritem a cellelmentet
+    const secondtd=document.createElement("td") //letrehozok egy td elemet
+    secondtd.innerText=tablebodyarray[i].remekmu //megadom a td szooveget a tombol
+    tablerow.appendChild(secondtd) //hozzaadom  a td elemet a tr-hez 
+
+    /**
+     * @type {HTMLTableCellElement} letrehozom a td-t
+    */
+    const thirdtd=document.createElement("td") //letrehozok egy td elemet
+    thirdtd.innerText=tablebodyarray[i].karakter //megadom a td szooveget a tombol
+    tablerow.appendChild(thirdtd) //hozzaadom  a td elemet a tr-hez 
+
+    /**
+     * @type {HTMLTableCellElement} letrehozom a td-t
+    */
+    const fourthtd=document.createElement("td") //letrehozok egy td elemet
+    fourthtd.innerText=tablebodyarray[i].secondkarakter //megadom a td szooveget a tombol
+    tablerow.appendChild(fourthtd) //hozzaadom  a td elemet a tr-hez 
+
+    
 }
+
+
+
 
 
 
