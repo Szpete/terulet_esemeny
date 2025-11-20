@@ -93,14 +93,49 @@ for(let i = 0; i<tablebodyarray.length; i++){ //for ciklus amely annyiszor fut l
     */
     const secondtd=document.createElement("td") //letrehozok egy td elemet
     secondtd.innerText=tablebodyarray[i].year //beallitom a td szoveget a megfelelo stringre  a tablebodyerray tombbol az i indexu objektum title alapjan
-    tablerow.appendChild(secondtd) //hozzaadom az elso td-t az trhez
+    tablerow.appendChild(secondtd) //hozzaadom az masdik td-t az trhez
 
     /**
     * @type {HTMLTableCellElement}  valtozo amiben egy td elem van
     */
     const thirdtd=document.createElement("td") //letrehozok egy td elemet
     thirdtd.innerText=tablebodyarray[i].event //beallitom a td szoveget a megfelelo stringre  a tablebodyerray tombbol az i indexu objektum title alapjan
-    tablerow.appendChild(thirdtd) //hozzaadom az elso td-t az trhez
+    tablerow.appendChild(thirdtd) //hozzaadom az harmadik td-t az trhez
+
+    if(tablebodyarray[i].secondyear && tablebodyarray[i].secondevent){ //ha az i indexu objektumnak van secondyear es secondevent tulajdonsga akkor ...
+
+        /**
+         * @type {HTMLTableRowElement} letrehozok egy tablerow-t
+        */
+        const secondtablerow=document.createElement("tr") //letrehozok egy tr elemet
+        tbody.appendChild(secondtablerow) //hozzaadom a tr elemet a tablazathoz
+
+        /**
+        * @type {HTMLTableCellElement} valtozo amiben egy td elem van
+        */
+        const fourthtd=document.createElement("td") //letrehozok egy td elemet
+        fourthtd.innerText=tablebodyarray[i].secondyear //beallitom a td szoveget a megfelelo stringre  a tablebodyerray tombbol az i indexu objektum title alapjan
+        secondtablerow.appendChild(fourthtd) //hozzaadom az elso td-t az trhez
+
+        /**
+        * @type {HTMLTableCellElement}  valtozo amiben egy td elem van
+        */
+        const fifthtd=document.createElement("td") //letrehozok egy td elemet
+        fifthtd.innerText=tablebodyarray[i].secondevent //beallitom a td szoveget a megfelelo stringre  a tablebodyerray tombbol az i indexu objektum title alapjan
+        secondtablerow.appendChild(fifthtd) //hozzaadom az elso td-t az trhez
+
+        firsttd.rowSpan=2 //beallitom az elso td rowSpan erteket 2-re
+    }
+
+
+
+
+
+
+
+
+
+
 }
 
 
